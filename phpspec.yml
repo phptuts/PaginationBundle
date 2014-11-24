@@ -1,0 +1,6 @@
+formatter.name: pretty
+
+suites:
+    noahglaser_entitybundle:
+        namespace: NoahGlaser\PaginationBundle
+        src_path:  './'

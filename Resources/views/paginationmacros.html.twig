@@ -1,0 +1,101 @@
+{# 
+    All of these macros are written with twitter bootstrap 3
+    pagination is PaginationResult Object
+    path_name_page_change is the path for the jquery plugin
+    positionulclass is either pull-right or pull-left (twitter bootstrap)
+#}
+{% macro createNumberPagination(pagination, path_name_page_change, positionulclass) %}
+
+    {% if position is not defined %}
+       {%  set positionulclass = "pull-right" %}
+    {% endif %}
+    
+    {% if pagination.getTotalPages() > 1  %}
+          <div class="pagination_container">
+                <ul class="pagination {{ positionulclass }}"  >
+                    
+                   {% if pagination.getPage() == 0 %}
+                        <li class="disabled"  >
+                            <a  href="#">&laquo;</a>
+                        </li>
+                            {% else %}
+                        <li>
+                            <a  href="#" data-pagenumber='{{  pagination.getPage() - 1 }}'  data-page="{{ path(path_name_page_change, {'page_id' : pagination.getPage() - 1 }) }}" >&laquo;</a>
+                        </li>
+                   {% endif %}                    
+                    
+                   {% set currentpage = pagination.getPage()  %}
+                    
+                   {% set startpage = 1 %}
+                    
+                   {% if currentpage > 5 %}
+                        {% set startpage = currentpage - 5 %}
+                   {% endif %}
+                    
+                   {% set endpage = pagination.getTotalPages() %}
+                    
+                   {% if (currentpage + 5) < pagination.getTotalPages() %}
+                        {% set endpage = currentpage + 5 %}
+                   {% endif %}
+                    
+                    
+                   {% for i in startpage..endpage %}
+                        
+                        {% if pagination.getPage() + 1 == i %}
+                                <li class="disabled">
+                                    <a  href="#">{{ i }}</a>
+                                </li>                    
+                            {% else %}
+                                <li>
+                                    <a data-pagenumber='{{   i - 1  }}'  data-page="{{ path(path_name_page_change, {'page_id' :  i - 1 }) }}" href="#">{{ i }}</a>
+                                </li>
+                        {% endif %}
+                   {% endfor %}
+
+                   {% if pagination.getPage() + 1 == pagination.getTotalPages() %}
+                        <li class="disabled" >
+                            <a  href="#">&raquo;</a>
+                        </li>
+                            {% else %}
+                        <li>
+                            <a  data-pagenumber='{{  pagination.getPage() + 1 }}' data-page="{{ path(path_name_page_change, {'page_id' : pagination.getPage() + 1 }) }}" href="#">&raquo;</a>
+                        </li>                
+                   {% endif %} 
+                   
+                </ul>
+          </div>
+   {% endif %}
+   
+{% endmacro %}
+
+{% macro createSimplePagination(pagination, path_name_page, positionulclass) %}
+    
+    {% if position is not defined %}
+       {%  set positionulclass = "pull-right" %}
+    {% endif %}
+              <div class="pagination_container">
+                <ul class="pager">
+                   
+                    {% if pagination.getPage() == 0 %}
+                        <li class="disabled"  >
+                            <a  href="#">&laquo;</a>
+                        </li>
+                            {% else %}
+                        <li>
+                            <a  href="#" data-pagenumber='{{  pagination.getPage() - 1 }}'  data-page="{{ path(path_name_page_change, {'page_id' : pagination.getPage() - 1 }) }}" >&laquo;</a>
+                        </li>
+                   {% endif %}
+                   
+                   
+                   {% if pagination.getPage() + 1 == pagination.getTotalPages() %}
+                        <li class="disabled" >
+                            <a  href="#">&raquo;</a>
+                        </li>
+                            {% else %}
+                        <li>
+                            <a  data-pagenumber='{{  pagination.getPage() + 1 }}' data-page="{{ path(path_name_page_change, {'page_id' : pagination.getPage() + 1 }) }}" href="#">&raquo;</a>
+                        </li>                
+                   {% endif %} 
+                </ul>
+              </div>
+{% endmacro %}

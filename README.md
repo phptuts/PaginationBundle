@@ -1,0 +1,1 @@
+This Bundles contains a pagination class for your populate and contains a simple macros that will work with a jquery plugin that I will be releasing very soon.

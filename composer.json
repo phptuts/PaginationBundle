@@ -1,0 +1,17 @@
+{
+    "name": "noahglaser/paginationbundle",
+    "description": "Contains a basic pagination class and simple macros that will work with a jquery plugin.",
+    "require-dev": {
+        "phpspec/phpspec": "~2.0",
+        "phpspec/prophecy": "~1.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Noah Glaser",
+            "email": "noah.php@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
